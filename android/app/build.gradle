@@ -1,0 +1,46 @@
+plugins {
+    id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+android {
+     compileSdkVersion 34  // Update to your compile SDK version
+    defaultConfig {
+        applicationId "com.example.ecommerce2"
+        minSdkVersion 21   // Multidex is supported natively for minSdkVersion 21 and higher
+        targetSdkVersion 34 // Update to your target SDK version
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+}
+       namespace 'com.example.ecommerce'
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+     implementation 'androidx.multidex:multidex:2.0.1'
+}
